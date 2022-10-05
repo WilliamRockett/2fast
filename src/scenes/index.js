@@ -1,7 +1,7 @@
 import game from './game.js';
-import lose from './lose.js';
+import end from './end.js';
 
 export {
     game,
-    lose,
+    end,
 }

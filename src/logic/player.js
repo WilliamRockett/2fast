@@ -16,6 +16,15 @@ export default function player() {
             nitro: 100,
             powerUps: {
 
+            },
+            kill() {
+                player.dead = true;
+                player.use(sprite('car_1_1_damage', { width: 70, height: 143 }));
+                player.use(rotate(30));
+                shake(50);
+                wait(0.5, () => {
+                    go('end', { score: player.score });
+                });
             }
         }
     ]);

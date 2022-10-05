@@ -2,26 +2,54 @@ import constants from '../constants/index.js';
 
 export default function playerMovement(player) {
     onKeyDown(constants.keyboard.INPUT_FORWARD, () => {
-        if (player.pos.y > player.width / 2) {
-            player.move(0, -constants.game.CAR_SPEED);
+        if (!player.dead) {
+            if (player.pos.y > player.width / 2) {
+                player.move(0, -constants.game.CAR_SPEED);
+            }
         }
     });
 
     onKeyDown(constants.keyboard.INPUT_LEFT, () => {
-        player.move(-constants.game.CAR_SPEED - 50, 0);
+        if (!player.dead) {
+            player.move(-constants.game.CAR_SPEED - 50, 0);
+            player.use(rotate(-5));
+        }
     });
 
     onKeyDown(constants.keyboard.INPUT_BACKWARD, () => {
-        if (player.pos.y < height() - player.width / 2) {
-            player.move(0, constants.game.CAR_SPEED);
+        if (!player.dead) {
+            if (player.pos.y < height() - player.width / 2) {
+                player.move(0, constants.game.CAR_SPEED);
+            }
         }
     });
 
     onKeyDown(constants.keyboard.INPUT_RIGHT, () => {
-        player.move(constants.game.CAR_SPEED + 50, 0);
+        if (!player.dead) {
+            player.move(constants.game.CAR_SPEED + 50, 0);
+            player.use(rotate(5));
+        }
     });
 
-    onKeyDown(constants.keyboard.INPUT_BOOST, () => {
+    onKeyRelease(constants.keyboard.INPUT_RIGHT, () => {
+        if (!player.dead) {
+            player.use(rotate(0));
+        }
+    });
 
+    onKeyRelease(constants.keyboard.INPUT_LEFT, () => {
+        if (!player.dead) {
+            player.use(rotate(0));
+        }
+    });
+
+    onKeyPress(constants.keyboard.INPUT_BOOST, () => {
+        add([
+            sprite('road_main', { width: constants.game.ROAD_WIDTH, height: height() }),
+            pos(0, 0),
+            area(),
+            layer('game'),
+            'road'
+        ]);
     });
 }

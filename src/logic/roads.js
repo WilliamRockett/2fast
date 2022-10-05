@@ -1,6 +1,6 @@
 import constants from '../constants/index.js';
 
-export default function roads() {
+export default function roads(player) {
     const borderSize = width() - constants.game.ROAD_LANES * constants.game.ROAD_WIDTH;
 
     for (let lane = 0; lane < constants.game.ROAD_LANES; lane++) {
@@ -55,7 +55,9 @@ export default function roads() {
     }
 
     onUpdate('road', (road) => {
-        road.move(0, constants.game.BACKGROUND_SPEED);
+        if (!player.dead) {
+            road.move(0, constants.game.BACKGROUND_SPEED);
+        }
         if (road.pos.y > height()) {
             destroy(road);
             add([
@@ -70,7 +72,9 @@ export default function roads() {
     });
 
     onUpdate('background', (background) => {
-        background.move(0, constants.game.BACKGROUND_SPEED);
+        if (!player.dead) {
+            background.move(0, constants.game.BACKGROUND_SPEED);
+        }
         if (background.pos.y > height()) {
             destroy(background);
             add([

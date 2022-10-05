@@ -14,19 +14,24 @@ export default function gameScene() {
         let player = logic.player();
         const score = add([text('Voitures depassees:' + player.score, { size: 18 }), pos(10, 50), layer('ui'), 'score']);
 
-        logic.roads();
+        logic.roads(player);
         handlers.collisions();
         handlers.playerMovement(player);
 
         setInterval(() => {
-            logic.enemy()
-        }, Math.floor(Math.random() * (1500 - 500 + 1) + 500));
+            if (!player.dead) {
+                logic.enemy()
+            }
+        }, Math.floor(Math.random() * (900 - 200 + 1) + 200));
 
         onUpdate('enemy', (enemy) => {
+            if (enemy.pos.y > player.pos.y && !enemy.overtaken) {
+                player.score++;
+                enemy.overtaken = true;
+                score.text = "Voitures depassees:" + player.score;
+            }
             if (enemy.pos.y > height() + enemy.height) {
                 destroy(enemy);
-                player.score++;
-                score.text = "Voitures depassees:" + player.score;
             }
         });
     });

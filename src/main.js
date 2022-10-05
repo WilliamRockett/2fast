@@ -16,6 +16,6 @@ debug.showLog = constants.kaboom.DEBUG_LOG;
 assets.load();
 
 loadScene.game();
-loadScene.lose();
+loadScene.end();
 
 go('game');
