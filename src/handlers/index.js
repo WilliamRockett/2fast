@@ -1,7 +1,7 @@
-import handleCollisions from './collision.js';
+import collisions from './collisions.js';
 import playerMovement from './playerMovement.js';
 
 export {
-    handleCollisions,
+    collisions,
     playerMovement
 }

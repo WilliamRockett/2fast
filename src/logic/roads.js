@@ -24,7 +24,6 @@ export default function roads() {
             sprite('road_main', { width: constants.game.ROAD_WIDTH, height: height() }),
             pos(constants.game.ROAD_WIDTH * lane + borderSize / 2, 0),
             area(),
-            cleanup(),
             layer('road'),
             { lane: lane },
             'road'

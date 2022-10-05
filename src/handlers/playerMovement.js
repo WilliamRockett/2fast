@@ -8,7 +8,7 @@ export default function playerMovement(player) {
     });
 
     onKeyDown(constants.keyboard.INPUT_LEFT, () => {
-        player.move(-constants.game.CAR_SPEED, 0);
+        player.move(-constants.game.CAR_SPEED - 50, 0);
     });
 
     onKeyDown(constants.keyboard.INPUT_BACKWARD, () => {
@@ -18,7 +18,7 @@ export default function playerMovement(player) {
     });
 
     onKeyDown(constants.keyboard.INPUT_RIGHT, () => {
-        player.move(constants.game.CAR_SPEED, 0);
+        player.move(constants.game.CAR_SPEED + 50, 0);
     });
 
     onKeyDown(constants.keyboard.INPUT_BOOST, () => {
