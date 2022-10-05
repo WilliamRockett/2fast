@@ -1,0 +1,7 @@
+export default {
+    BACKGROUND_SPEED: 500,
+    ROAD_WIDTH: 400,
+    ROAD_LANES: 3,
+    PLAYER_CAR_HEALTH: 2,
+    CAR_SPEED: 400
+}
