@@ -3,7 +3,7 @@ import constants from '../constants/index.js';
 export default function endScene() {
     scene('end', (args) => {
         add([
-            text('Perdu\n\nAppuyez sur ESPACE pour rejouer', { size: 24 }),
+            text('Perdu\n\nAppuyez sur ENTER pour rejouer', { size: 24 }),
             origin('center'),
             pos(width() / 2, height() / 2)
         ])
@@ -13,6 +13,6 @@ export default function endScene() {
             origin('center')
         ]);
 
-        onKeyPress(constants.keyboard.INPUT_BOOST, () => go('game'));
+        onKeyPress(constants.keyboard.INPUT_ENTER, () => go('game'));
     })
 }

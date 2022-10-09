@@ -43,13 +43,15 @@ export default function playerMovement(player) {
         }
     });
 
-    onKeyPress(constants.keyboard.INPUT_BOOST, () => {
-        add([
-            sprite('road_main', { width: constants.game.ROAD_WIDTH, height: height() }),
-            pos(0, 0),
-            area(),
-            layer('game'),
-            'road'
-        ]);
+    onKeyDown(constants.keyboard.INPUT_BOOST, () => {
+        if (!player.dead && player.nitro > 0) {
+            player.enableNitro();
+        }
+    });
+
+    onKeyRelease(constants.keyboard.INPUT_BOOST, () => {
+        if (!player.dead) {
+            player.disableNitro();
+        }
     });
 }
