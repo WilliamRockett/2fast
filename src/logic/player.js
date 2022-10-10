@@ -7,7 +7,6 @@ export default function player() {
         area({ scale: 0.9 }),
         origin('center'),
         health(constants.game.PLAYER_CAR_HEALTH),
-        // solid(),
         layer('game'),
         'player',
         {
@@ -33,8 +32,7 @@ export default function player() {
     let nitroSprite = null;
 
     player.onUpdate(() => {
-        console.log(player.pos.y)
-        if (player.nitroEnabled) {
+        if (player.nitroEnabled && !player.dead) {
             if (player.nitro > 0) {
                 player.nitro -= Math.round((constants.game.MAX_NITRO * 1.5) * dt());
 
@@ -47,7 +45,7 @@ export default function player() {
                         sprite('nitro_low', { width: 100, height: 213 }),
                         pos(),
                         follow(player, vec2(-50, 60)),
-                        area(),
+                        area({ height: 213 / 1.5, width: 100 / 2, offset: vec2(24, 0) }),
                         layer('game'),
                         'nitro'
                     ]);

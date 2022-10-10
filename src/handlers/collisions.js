@@ -4,11 +4,15 @@ export default function collisions() {
         player.kill();
     });
 
-    onCollide('player', 'enemy', (player, enemy, collision) => {
+    onCollide('player', 'enemy', (player, enemy) => {
         debug.log('Collision avec une autre voiture');
         player.kill();
-
-        enemy.use(sprite('car_2_broken', { width: 87, height: 186 }));
         enemy.unuse('move');
+        enemy.kill();
+    });
+
+    onCollide('nitro', 'enemy', (nitro, enemy) => {
+        debug.log('Collision nitro / voiture');
+        enemy.kill();
     });
 }

@@ -13,7 +13,7 @@ export default function gameScene() {
 
         let player = logic.player();
         const score = add([text('Voitures depassees:' + player.score, { size: 18 }), pos(10, 50), layer('ui'), 'score']);
-        const nitro = add([text('Nitro:' + player.nitro, { size: 18 }), pos(10, 100), layer('ui'), 'nitro']);
+        const nitro = add([text('Nitro:' + player.nitro, { size: 18 }), pos(10, 100), layer('ui'), 'nitroLabel']);
 
         logic.roads(player);
         handlers.collisions();

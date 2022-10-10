@@ -10,12 +10,15 @@ export default function enemy() {
         area({ scale: 0.8 }),
         origin('center'),
         health(constants.game.PLAYER_CAR_HEALTH),
-        // solid(),
         layer('game'),
         move(-990, constants.game.ENEMIES_CAR_SPEED),
         'enemy',
         {
-            overtaken: false
+            overtaken: false,
+            kill() {
+                enemy.use(sprite('car_2_broken', { width: 87, height: 186 }));
+                enemy.use(rotate(-30));
+            }
         }
     ]);
 
