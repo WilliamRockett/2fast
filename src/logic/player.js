@@ -11,6 +11,7 @@ export default function player() {
         'player',
         {
             dead: false,
+            isBraking: false,
             score: 0,
             kills: 0,
             nitro: constants.game.MAX_NITRO,
@@ -68,6 +69,26 @@ export default function player() {
                 destroy(nitroSprite);
                 nitroSprite = null;
             }
+        }
+
+        if (player.isBraking) {
+            add([
+                sprite('stop_signal', { width: 394 / 4, height: 135 / 4 }),
+                pos(),
+                follow(player, vec2(-73, 46)),
+                layer('game'),
+                'carbrake'
+            ]);
+
+            add([
+                sprite('stop_signal', { width: 99, height: 34 }),
+                pos(),
+                follow(player, vec2(-27, 46)),
+                layer('game'),
+                'carbrake'
+            ]);
+        } else {
+            destroyAll('carbrake');
         }
     });
 

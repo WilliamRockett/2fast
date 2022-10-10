@@ -12,6 +12,7 @@ export default function loadAssets() {
     loadSprite('car_2_0_damage', '/car_2_main_positions/car_2_01.png');
     loadSprite('car_2_broken', '/car_2_main_positions/car_2_05.png');
     loadSprite('nitro_low', '/car_effects/nitro_low/nitro_low_000.png');
+    loadSprite('stop_signal', '/car_effects/stop_signals/stop_signals_000.png');
 
     // loadSprite('nitro', '/car_effects/nitro_low/nitro.png', {
     //     sliceX: 200,

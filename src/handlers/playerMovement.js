@@ -21,7 +21,13 @@ export default function playerMovement(player) {
             if (player.pos.y < height() - player.height / 2) {
                 player.move(0, constants.game.CAR_SPEED);
             }
+
+            player.isBraking = true;
         }
+    });
+
+    onKeyRelease(constants.keyboard.INPUT_BACKWARD, () => {
+        player.isBraking = false;
     });
 
     onKeyDown(constants.keyboard.INPUT_RIGHT, () => {
