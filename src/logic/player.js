@@ -12,6 +12,7 @@ export default function player() {
         {
             dead: false,
             score: 0,
+            kills: 0,
             nitro: constants.game.MAX_NITRO,
             nitroEnabled: false,
             powerUps: {
@@ -47,7 +48,10 @@ export default function player() {
                         follow(player, vec2(-50, 60)),
                         area({ height: 213 / 1.5, width: 100 / 2, offset: vec2(24, 0) }),
                         layer('game'),
-                        'nitro'
+                        'nitro',
+                        {
+                            player: player
+                        }
                     ]);
                 }
             } else {
