@@ -21,7 +21,7 @@ export default function gameScene() {
 
         setInterval(() => {
             if (!player.dead) {
-                logic.enemy()
+                logic.enemy();
             }
         }, Math.floor(Math.random() * (900 - 200 + 1) + 200));
 
@@ -34,6 +34,10 @@ export default function gameScene() {
             if (enemy.pos.y > height() + enemy.height) {
                 destroy(enemy);
             }
+        });
+
+        onUpdate('player', (player) => {
+            nitro.text = "Nitro:" + player.nitro;
         });
     });
 }

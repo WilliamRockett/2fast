@@ -1,7 +1,5 @@
 import constants from '../constants/index.js';
 
-let nitro;
-
 export default function player() {
     const player = add([
         sprite('car_1_0_damage', { width: 70, height: 143 }),
@@ -15,25 +13,10 @@ export default function player() {
         {
             dead: false,
             score: 0,
-            nitro: 100,
+            nitro: constants.game.MAX_NITRO,
+            nitroEnabled: false,
             powerUps: {
 
-            },
-            enableNitro() {
-                // TODO:
-                if (this.enableNitro && this.nitro > 0) {
-                    nitro = add([
-                        sprite('nitro_low', { width: 100, height: 213 }),
-                        pos(),
-                        follow(player, vec2(-50, 60)),
-                        area(),
-                        layer('game'),
-                        'nitro'
-                    ]);
-                }
-            },
-            disableNitro(){
-                destroy(nitro);
             },
             kill() {
                 player.dead = true;
@@ -46,6 +29,45 @@ export default function player() {
             }
         }
     ]);
+
+    let nitroSprite = null;
+
+    player.onUpdate(() => {
+        console.log(player.pos.y)
+        if (player.nitroEnabled) {
+            if (player.nitro > 0) {
+                player.nitro -= Math.round((constants.game.MAX_NITRO * 1.5) * dt());
+
+                if (player.pos.y > player.height / 2) {
+                    player.pos.y -= 5;
+                }
+
+                if (nitroSprite === null) {
+                    nitroSprite = add([
+                        sprite('nitro_low', { width: 100, height: 213 }),
+                        pos(),
+                        follow(player, vec2(-50, 60)),
+                        area(),
+                        layer('game'),
+                        'nitro'
+                    ]);
+                }
+            } else {
+                destroy(nitroSprite);
+                nitroSprite = null;
+            }
+        } else {
+            // regen nitro
+            if (player.nitro < constants.game.MAX_NITRO) {
+                player.nitro += Math.round(constants.game.MAX_NITRO * dt());
+            }
+
+            if (nitroSprite !== null) {
+                destroy(nitroSprite);
+                nitroSprite = null;
+            }
+        }
+    });
 
     return player;
 }
