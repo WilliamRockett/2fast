@@ -15,6 +15,7 @@ export default function loadAssets() {
     loadSprite('stop_signal', '/car_effects/stop_signals/stop_signals_000.png');
     loadSprite('jumping_pad', '/game_props_items/Jumping_Pad_02.png');
     loadSprite('label_bar', '/main_ui/hp_bar.png');
+    loadSprite('smoke_1', '/car_effects/smoke/smoke_000.png');
 
     // loadSprite('nitro', '/car_effects/nitro_low/nitro.png', {
     //     sliceX: 200,

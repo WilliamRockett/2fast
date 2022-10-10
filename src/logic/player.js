@@ -11,7 +11,7 @@ export default function player() {
         area({ scale: 0.9 }),
         origin('center'),
         health(constants.game.PLAYER_CAR_HEALTH),
-        layer('game'),
+        layer('car'),
         'player',
         {
             dead: false,
@@ -54,6 +54,20 @@ export default function player() {
                                             wait(delay / 2, () => {
                                                 player.use(sprite('car_1_0_damage', { width: defaultCarWidth, height: defaultCarHeight }));
                                                 player.isJumping = false;
+
+                                                add([
+                                                    sprite('smoke_1', { width: 778 / 5, height: 663 / 5 }),
+                                                    pos(player.pos.x - 65, player.pos.y - 80),
+                                                    move(-990, constants.game.BACKGROUND_SPEED),
+                                                    area(),
+                                                    cleanup(),
+                                                    layer('game'),
+                                                    'smoke',
+                                                    {
+                                                        rotation: 0,
+                                                        opacity: 1,
+                                                    }
+                                                ]);
                                             });
                                         });
                                     });
@@ -65,6 +79,13 @@ export default function player() {
             }
         }
     ]);
+
+    onUpdate('smoke', (smoke) => {
+        smoke.rotation += 10 * dt();
+        smoke.opacity -= 0.05;
+        smoke.use(rotate(smoke.rotation));
+        smoke.use(opacity(smoke.opacity));
+    });
 
     player.onUpdate(() => {
         if (player.nitroEnabled && !player.dead) {
@@ -81,7 +102,7 @@ export default function player() {
                         pos(),
                         follow(player, vec2(-50, 60)),
                         area({ height: 213 / 1.5, width: 100 / 2, offset: vec2(24, 0) }),
-                        layer('game'),
+                        layer('car'),
                         'nitro',
                         {
                             player: player
@@ -109,7 +130,7 @@ export default function player() {
                 sprite('stop_signal', { width: 394 / 4, height: 135 / 4 }),
                 pos(),
                 follow(player, vec2(-73, 46)),
-                layer('game'),
+                layer('car'),
                 'carbrake'
             ]);
 
@@ -117,7 +138,7 @@ export default function player() {
                 sprite('stop_signal', { width: 99, height: 34 }),
                 pos(),
                 follow(player, vec2(-27, 46)),
-                layer('game'),
+                layer('car'),
                 'carbrake'
             ]);
         } else {

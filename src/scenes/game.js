@@ -9,6 +9,7 @@ export default function gameScene() {
             'road',
             'obstacle',
             'game',
+            'car',
             'ui'
         ]);
 
@@ -33,7 +34,7 @@ export default function gameScene() {
                 logic.jumpingPad(player);
             }
         }, Math.random() * (10000 - 5000 + 1) + 5000);
-        
+
         onUpdate('enemy', (enemy) => {
             if (enemy.pos.y > player.pos.y && !enemy.overtaken) {
                 player.score++;
