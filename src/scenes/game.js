@@ -12,13 +12,14 @@ export default function gameScene() {
         ]);
 
         let player = logic.player();
-        const score = add([text('Voitures depassees:' + player.score, { size: 18 }), pos(10, 50), layer('ui'), 'score']);
-        const nitro = add([text('Nitro:' + player.nitro, { size: 18 }), pos(10, 100), layer('ui'), 'nitroLabel']);
-        const kills = add([text('Kills:' + player.nitro, { size: 18 }), pos(10, 150), layer('ui'), 'killsLabel']);
-
         logic.roads(player);
         handlers.collisions();
         handlers.playerMovement(player);
+
+        add([sprite('label_bar', { width: 340, height: 100 }), pos(0, 50), layer('ui'),]);
+        const score = add([text('Voitures depassees:' + player.score, { size: 18 }), pos(10, 70), layer('ui'), 'score']);
+        const nitro = add([text('Nitro:' + player.nitro, { size: 18 }), pos(10, 90), layer('ui'), 'nitroLabel']);
+        const kills = add([text('Kills:' + player.nitro, { size: 18 }), pos(10, 110), layer('ui'), 'killsLabel']);
 
         setInterval(() => {
             if (!player.dead) {
