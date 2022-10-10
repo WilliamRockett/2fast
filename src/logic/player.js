@@ -1,8 +1,12 @@
 import constants from '../constants/index.js';
 
 export default function player() {
+    const defaultCarWidth = 70;
+    const defaultCarHeight = 143;
+    let nitroSprite = null;
+
     const player = add([
-        sprite('car_1_0_damage', { width: 70, height: 143 }),
+        sprite('car_1_0_damage', { width: defaultCarWidth, height: defaultCarHeight }),
         pos((width() - constants.game.ROAD_LANES * constants.game.ROAD_WIDTH) / 2 + constants.game.ROAD_WIDTH / 2, height() - 80),
         area({ scale: 0.9 }),
         origin('center'),
@@ -12,6 +16,7 @@ export default function player() {
         {
             dead: false,
             isBraking: false,
+            isJumping: false,
             score: 0,
             kills: 0,
             nitro: constants.game.MAX_NITRO,
@@ -21,17 +26,45 @@ export default function player() {
             },
             kill() {
                 player.dead = true;
-                player.use(sprite('car_1_1_damage', { width: 70, height: 143 }));
+                player.use(sprite('car_1_1_damage', { width: defaultCarWidth, height: defaultCarHeight }));
                 player.use(rotate(30));
                 shake(50);
                 wait(0.5, () => {
                     go('end', { score: player.score });
                 });
+            },
+            jump() {
+                const delay = 0.05;
+                player.isJumping = true;
+
+                wait(delay, () => {
+                    player.use(sprite('car_1_0_damage', { width: defaultCarWidth + 5, height: defaultCarHeight + 5 }));
+                    wait(delay, () => {
+                        player.use(sprite('car_1_0_damage', { width: defaultCarWidth + 10, height: defaultCarHeight + 10 }));
+                        wait(delay, () => {
+                            player.use(sprite('car_1_0_damage', { width: defaultCarWidth + 15, height: defaultCarHeight + 10 }));
+                            wait(delay, () => {
+                                player.use(sprite('car_1_0_damage', { width: defaultCarWidth + 20, height: defaultCarHeight + 20 }));
+                                wait(0.7, () => {
+                                    player.use(sprite('car_1_0_damage', { width: defaultCarWidth + 15, height: defaultCarHeight + 15 }));
+                                    wait(delay / 2, () => {
+                                        player.use(sprite('car_1_0_damage', { width: defaultCarWidth + 10, height: defaultCarHeight + 10 }));
+                                        wait(delay / 2, () => {
+                                            player.use(sprite('car_1_0_damage', { width: defaultCarWidth + 5, height: defaultCarHeight + 5 }));
+                                            wait(delay / 2, () => {
+                                                player.use(sprite('car_1_0_damage', { width: defaultCarWidth, height: defaultCarHeight }));
+                                                player.isJumping = false;
+                                            });
+                                        });
+                                    });
+                                });
+                            });
+                        });
+                    });
+                });
             }
         }
     ]);
-
-    let nitroSprite = null;
 
     player.onUpdate(() => {
         if (player.nitroEnabled && !player.dead) {

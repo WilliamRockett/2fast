@@ -19,4 +19,15 @@ export default function collisions() {
         enemy.kill();
         nitro.player.kills++;
     });
+
+    onCollide('player', 'jumping_pad', (player) => {
+        if (!player.isJumping) {
+            player.jump();
+        }
+    });
+
+    onCollide('enemy', 'jumping_pad', (enemy) => {
+        //TODO: rota hitbox
+        enemy.kill();
+    });
 }

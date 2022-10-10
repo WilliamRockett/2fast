@@ -7,6 +7,7 @@ export default function gameScene() {
         layers([
             'background',
             'road',
+            'obstacle',
             'game',
             'ui'
         ]);
@@ -16,7 +17,7 @@ export default function gameScene() {
         handlers.collisions();
         handlers.playerMovement(player);
 
-        add([sprite('label_bar', { width: 340, height: 100 }), pos(0, 50), layer('ui'),]);
+        add([sprite('label_bar', { width: 340, height: 100 }), pos(0, 50), opacity(0.7), layer('ui'),]);
         const score = add([text('Voitures depassees:' + player.score, { size: 18 }), pos(10, 70), layer('ui'), 'score']);
         const nitro = add([text('Nitro:' + player.nitro, { size: 18 }), pos(10, 90), layer('ui'), 'nitroLabel']);
         const kills = add([text('Kills:' + player.nitro, { size: 18 }), pos(10, 110), layer('ui'), 'killsLabel']);
@@ -25,8 +26,14 @@ export default function gameScene() {
             if (!player.dead) {
                 logic.enemy();
             }
-        }, Math.floor(Math.random() * (900 - 200 + 1) + 200));
+        }, Math.random() * (900 - 200 + 1) + 200);
 
+        setInterval(() => {
+            if (!player.dead) {
+                logic.jumpingPad(player);
+            }
+        }, Math.random() * (10000 - 5000 + 1) + 5000);
+        
         onUpdate('enemy', (enemy) => {
             if (enemy.pos.y > player.pos.y && !enemy.overtaken) {
                 player.score++;

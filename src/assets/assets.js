@@ -13,6 +13,7 @@ export default function loadAssets() {
     loadSprite('car_2_broken', '/car_2_main_positions/car_2_05.png');
     loadSprite('nitro_low', '/car_effects/nitro_low/nitro_low_000.png');
     loadSprite('stop_signal', '/car_effects/stop_signals/stop_signals_000.png');
+    loadSprite('jumping_pad', '/game_props_items/Jumping_Pad_02.png');
     loadSprite('label_bar', '/main_ui/hp_bar.png');
 
     // loadSprite('nitro', '/car_effects/nitro_low/nitro.png', {
