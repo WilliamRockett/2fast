@@ -9,6 +9,7 @@ export default function roads(player) {
                 sprite('soil_tile', { width: borderSize / 2, height: height() }),
                 pos(0, 0),
                 area(),
+                stay(),
                 layer('background'),
                 'background'
             ]);
@@ -16,6 +17,7 @@ export default function roads(player) {
                 sprite('soil_tile', { width: borderSize / 2, height: height() }),
                 pos(0, -height()),
                 area(),
+                stay(),
                 layer('background'),
                 'background'
             ]);
@@ -24,6 +26,7 @@ export default function roads(player) {
             sprite('road_main', { width: constants.game.ROAD_WIDTH, height: height() }),
             pos(constants.game.ROAD_WIDTH * lane + borderSize / 2, 0),
             area(),
+            stay(),
             layer('road'),
             { lane: lane },
             'road'
@@ -32,6 +35,7 @@ export default function roads(player) {
             sprite('road_main', { width: constants.game.ROAD_WIDTH, height: height() }),
             pos(constants.game.ROAD_WIDTH * lane + borderSize / 2, -height()),
             area(),
+            stay(),
             layer('road'),
             { lane: lane },
             'road'
@@ -41,6 +45,7 @@ export default function roads(player) {
                 sprite('soil_tile', { width: borderSize / 2, height: height() }),
                 pos(width() - borderSize / 2, 0),
                 area(),
+                stay(),
                 layer('background'),
                 'background'
             ]);
@@ -48,6 +53,7 @@ export default function roads(player) {
                 sprite('soil_tile', { width: borderSize / 2, height: height() }),
                 pos(width() - borderSize / 2, -height()),
                 area(),
+                stay(),
                 layer('background'),
                 'background'
             ]);
@@ -64,6 +70,7 @@ export default function roads(player) {
                 sprite('road_main', { width: constants.game.ROAD_WIDTH, height: height() }),
                 pos(constants.game.ROAD_WIDTH * road.lane + borderSize / 2, -height()),
                 area(),
+                stay(),
                 layer('road'),
                 { lane: road.lane },
                 'road'
@@ -81,6 +88,7 @@ export default function roads(player) {
                 sprite('soil_tile', { width: borderSize / 2, height: height() }),
                 pos(background.pos.x === 0 ? 0 : width() - borderSize / 2, -height()),
                 area(),
+                stay(),
                 layer('background'),
                 'background'
             ]);

@@ -9,7 +9,6 @@ export default function enemy() {
         pos(Math.floor(Math.random() * (roadEnd - roadStart + 1) + roadStart), -100),
         area({ scale: 0.8 }),
         origin('center'),
-        health(constants.game.PLAYER_CAR_HEALTH),
         layer('game'),
         move(-990, constants.game.ENEMIES_CAR_SPEED),
         'enemy',

@@ -10,7 +10,6 @@ export default function player() {
         pos((width() - constants.game.ROAD_LANES * constants.game.ROAD_WIDTH) / 2 + constants.game.ROAD_WIDTH / 2, height() - 80),
         area({ scale: 0.9 }),
         origin('center'),
-        health(constants.game.PLAYER_CAR_HEALTH),
         layer('car'),
         'player',
         {
@@ -18,6 +17,7 @@ export default function player() {
             isBraking: false,
             isJumping: false,
             score: 0,
+            overtake: 0,
             kills: 0,
             nitro: constants.game.MAX_NITRO,
             nitroEnabled: false,
@@ -30,7 +30,7 @@ export default function player() {
                 player.use(rotate(30));
                 shake(50);
                 wait(0.5, () => {
-                    go('end', { score: player.score });
+                    go('end', { score: player.score, overtake: player.overtake, kills: player.kills });
                 });
             },
             jump() {
@@ -88,6 +88,8 @@ export default function player() {
     });
 
     player.onUpdate(() => {
+        player.score++;
+
         if (player.nitroEnabled && !player.dead) {
             if (player.nitro > 0) {
                 player.nitro -= Math.round((constants.game.MAX_NITRO * 1.5) * dt());
