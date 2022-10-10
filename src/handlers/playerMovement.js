@@ -2,7 +2,7 @@ import constants from '../constants/index.js';
 
 export default function playerMovement(player) {
     onKeyDown(constants.keyboard.INPUT_FORWARD, () => {
-        if (!player.dead && !player.isJumping) {
+        if (!player.dead) {
             if (player.pos.y > player.height / 2) {
                 player.move(0, -constants.game.CAR_SPEED);
             }
@@ -10,18 +10,21 @@ export default function playerMovement(player) {
     });
 
     onKeyDown(constants.keyboard.INPUT_LEFT, () => {
-        if (!player.dead && !player.isJumping) {
-            player.move(-constants.game.CAR_SPEED - 50, 0);
+        if (!player.dead) {
+            player.move(
+                player.isJumping
+                    ? -constants.game.CAR_SPEED / 2
+                    : -constants.game.CAR_SPEED - 70
+                , 0);
             player.use(rotate(-5));
         }
     });
+
     onKeyDown(constants.keyboard.INPUT_BACKWARD, () => {
         if (!player.dead) {
             player.isBraking = true;
-            if (!player.isJumping) {
-                if (player.pos.y < height() - player.height / 2) {
-                    player.move(0, constants.game.CAR_SPEED);
-                }
+            if (player.pos.y < height() - player.height / 2) {
+                player.move(0, constants.game.CAR_SPEED);
             }
         }
     });
@@ -31,8 +34,12 @@ export default function playerMovement(player) {
     });
 
     onKeyDown(constants.keyboard.INPUT_RIGHT, () => {
-        if (!player.dead && !player.isJumping) {
-            player.move(constants.game.CAR_SPEED + 50, 0);
+        if (!player.dead) {
+            player.move(
+                player.isJumping
+                    ? constants.game.CAR_SPEED / 2
+                    : constants.game.CAR_SPEED + 70
+                , 0);
             player.use(rotate(5));
         }
     });

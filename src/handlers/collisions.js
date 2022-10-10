@@ -6,11 +6,13 @@ export default function collisions() {
     });
 
     onCollide('player', 'enemy', (player, enemy) => {
-        debug.log('Collision avec une autre voiture');
+        if (!player.isJumping) {
+            debug.log('Collision avec une autre voiture');
 
-        player.kill();
-        enemy.unuse('move');
-        enemy.kill();
+            player.kill();
+            enemy.unuse('move');
+            enemy.kill();
+        }
     });
 
     onCollide('nitro', 'enemy', (nitro, enemy) => {
