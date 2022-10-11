@@ -136,6 +136,7 @@ export default function player() {
             add([
                 sprite('stop_signal', { width: 394 / 4, height: 135 / 4 }),
                 pos(),
+                opacity(0.2),
                 follow(player, vec2(-73, 46)),
                 layer('car'),
                 'carbrake'
@@ -144,6 +145,7 @@ export default function player() {
             add([
                 sprite('stop_signal', { width: 99, height: 34 }),
                 pos(),
+                opacity(0.2),
                 follow(player, vec2(-27, 46)),
                 layer('car'),
                 'carbrake'
