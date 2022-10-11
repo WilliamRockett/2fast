@@ -15,7 +15,8 @@ debug.showLog = constants.kaboom.DEBUG_LOG;
 
 assets.load();
 
+loadScene.menu();
 loadScene.game();
 loadScene.end();
 
-go('game');
+go('menu');

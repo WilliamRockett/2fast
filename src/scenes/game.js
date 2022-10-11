@@ -2,7 +2,7 @@ import constants from '../constants/index.js';
 import * as handlers from '../handlers/index.js';
 import * as logic from '../logic/index.js';
 
-export default function gameScene() {
+export default function game() {
     scene('game', () => {
         layers([
             'background',
