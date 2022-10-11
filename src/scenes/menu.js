@@ -14,7 +14,7 @@ export default function menu() {
         });
 
         utils.ui.addButton('2 joueurs en ligne', vec2(width() / 2, height() / 2 + 150), () => {
-            //TODO:
+            go('onlineTest');
         });
     })
 }
