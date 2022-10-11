@@ -15,11 +15,10 @@ export default function collisions() {
         }
     });
 
-    onCollide('nitro', 'enemy', (nitro, enemy) => {
-        debug.log('Collision nitro / voiture');
+    onCollide('player', 'sprinter', (player) => {
+        debug.log('Collision avec un sprinter');
 
-        enemy.kill();
-        nitro.player.kills++;
+        player.kill();
     });
 
     onCollide('player', 'jumping_pad', (player) => {
@@ -28,8 +27,19 @@ export default function collisions() {
         }
     });
 
+    onCollide('nitro', 'enemy', (nitro, enemy) => {
+        debug.log('Collision nitro / voiture');
+
+        enemy.kill();
+        nitro.player.kills++;
+    });
+
     onCollide('enemy', 'jumping_pad', (enemy) => {
         //TODO: rota hitbox
+        enemy.kill();
+    });
+
+    onCollide('enemy', 'sprinter', (enemy) => {
         enemy.kill();
     });
 }

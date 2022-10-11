@@ -4,5 +4,6 @@ export default {
     ROAD_LANES: 4,
     CAR_SPEED: 400,
     ENEMIES_CAR_SPEED: 700,
+    SPRINTER_CAR_SPEED: 1500,
     MAX_NITRO: 100
 }

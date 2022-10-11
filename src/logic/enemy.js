@@ -6,7 +6,7 @@ export default function enemy() {
 
     const enemy = add([
         sprite('car_2_0_damage', { width: 87, height: 186 }),
-        pos(Math.floor(Math.random() * (roadEnd - roadStart + 1) + roadStart), -100),
+        pos(rand(roadEnd, roadStart), -100),
         area({ scale: 0.8 }),
         origin('center'),
         layer('game'),

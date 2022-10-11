@@ -6,7 +6,7 @@ export default function jumpingPad(player) {
 
     const jumpingPad = add([
         sprite('jumping_pad', { width: constants.game.ROAD_WIDTH / 3, height: 100 }),
-        pos(Math.random() * (roadEnd - roadStart + 1) + roadStart, -100),
+        pos(rand(roadStart, roadEnd), -100),
         area(),
         layer('obstacle'),
         move(-990, constants.game.BACKGROUND_SPEED),

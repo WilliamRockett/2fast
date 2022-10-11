@@ -13,7 +13,7 @@ export default function gameScene() {
             'ui'
         ]);
 
-        let player = logic.player();
+        const player = logic.player();
         logic.roads(player);
         handlers.collisions();
         handlers.playerMovement(player);
@@ -28,13 +28,19 @@ export default function gameScene() {
             if (!player.dead) {
                 logic.enemy();
             }
-        }, Math.random() * (900 - 200 + 1) + 200);
+        }, randi(900, 200));
+
+        setInterval(() => {
+            if (!player.dead) {
+                logic.sprinter();
+            }
+        }, randi(30000, 15000));
 
         setInterval(() => {
             if (!player.dead) {
                 logic.jumpingPad(player);
             }
-        }, Math.random() * (10000 - 5000 + 1) + 5000);
+        }, randi(10000, 5000));
 
         onUpdate('enemy', (enemy) => {
             if (enemy.pos.y > player.pos.y && !enemy.overtaken) {

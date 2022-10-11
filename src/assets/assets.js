@@ -11,6 +11,8 @@ export default function loadAssets() {
     loadSprite('car_1_broken', '/car_1_main_positions/car_1_05.png');
     loadSprite('car_2_0_damage', '/car_2_main_positions/car_2_01.png');
     loadSprite('car_2_broken', '/car_2_main_positions/car_2_05.png');
+    loadSprite('car_3_0_damage', '/car_3_main_positions/car_3_01.png');
+    loadSprite('car_3_1_damage', '/car_3_main_positions/car_3_05.png');
     loadSprite('nitro_low', '/car_effects/nitro_low/nitro_low_000.png');
     loadSprite('stop_signal', '/car_effects/stop_signals/stop_signals_000.png');
     loadSprite('jumping_pad', '/game_props_items/Jumping_Pad_02.png');
