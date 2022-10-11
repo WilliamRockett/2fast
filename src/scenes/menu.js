@@ -13,8 +13,8 @@ export default function menu() {
             go('game');
         });
 
-        utils.ui.addButton('2 joueurs en ligne', vec2(width() / 2, height() / 2 + 150), () => {
-            go('onlineTest');
+        utils.ui.addButton('2 joueurs en ligne', vec2(width() / 2, height() / 2 + 180), () => {
+            go('onlineMenu');
         });
     })
 }

@@ -1,4 +1,4 @@
 export default {
-    SERVER_IP: 'TODO',
+    SERVER_IP: 'localhost',
     SERVER_PORT: 5600
 }
