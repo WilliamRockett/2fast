@@ -22,16 +22,21 @@ export default function player() {
             nitro: constants.game.MAX_NITRO,
             nitroEnabled: false,
             powerUps: {
-
+                shield: false
             },
             kill() {
-                player.dead = true;
-                player.use(sprite('car_1_1_damage', { width: defaultCarWidth, height: defaultCarHeight }));
-                player.use(rotate(30));
-                shake(50);
-                wait(0.5, () => {
-                    go('end', { score: player.score, overtake: player.overtake, kills: player.kills });
-                });
+                if (player.powerUps.shield) {
+                    player.powerUps.shield = false
+                    shake(10);
+                } else {
+                    player.dead = true;
+                    player.use(sprite('car_1_1_damage', { width: defaultCarWidth, height: defaultCarHeight }));
+                    player.use(rotate(30));
+                    shake(50);
+                    wait(0.5, () => {
+                        go('end', { score: player.score, overtake: player.overtake, kills: player.kills });
+                    });
+                }
             },
             jump() {
                 const delay = 0.05;
@@ -76,7 +81,7 @@ export default function player() {
                         });
                     });
                 });
-            }
+            },
         }
     ]);
 

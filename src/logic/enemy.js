@@ -21,5 +21,11 @@ export default function enemy() {
         }
     ]);
 
+    enemy.onUpdate(() => {
+        if (enemy.pos.y > height() + enemy.height) {
+            destroy(enemy);
+        }
+    });
+
     return enemy;
 }

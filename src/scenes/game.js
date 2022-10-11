@@ -18,6 +18,7 @@ export default function game() {
         handlers.collisions();
         handlers.playerMovement(player);
 
+        let powerUpsIcons = { shield: false };
         add([sprite('label_bar', { width: 340, height: 120 }), pos(0, 50), opacity(0.7), layer('ui')]);
         const score = add([text('Distance:' + player.score, { size: constants.fontsize.TEXT }), pos(10, 70), layer('ui')]);
         const overtake = add([text('Depassements:' + player.overtake, { size: constants.fontsize.TEXT }), pos(10, 90), layer('ui')]);
@@ -42,14 +43,17 @@ export default function game() {
             }
         }, randi(10000, 5000));
 
+        setInterval(() => {
+            if (!player.dead && !player.powerUps.shield) {
+                logic.shield();
+            }
+        }, randi(20000, 2000));
+
         onUpdate('enemy', (enemy) => {
             if (enemy.pos.y > player.pos.y && !enemy.overtaken) {
                 player.overtake++;
                 enemy.overtaken = true;
                 overtake.text = "Depassements:" + player.overtake;
-            }
-            if (enemy.pos.y > height() + enemy.height) {
-                destroy(enemy);
             }
         });
 
@@ -57,6 +61,15 @@ export default function game() {
             score.text = "Distance:" + player.score / 100 + 'kms';
             nitro.text = "Nitro:" + player.nitro;
             kills.text = "Kills:" + player.kills;
+
+            if (player.powerUps.shield) {
+                if (!powerUpsIcons.shield) {
+                    powerUpsIcons.shield = add([sprite('shield', { width: 43, height: 43 }), pos(10, 180), layer('ui')]);
+                }
+            } else {
+                destroy(powerUpsIcons.shield);
+                powerUpsIcons.shield = false;
+            }
         });
     });
 }

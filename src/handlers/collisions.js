@@ -10,8 +10,11 @@ export default function collisions() {
             debug.log('Collision avec une autre voiture');
 
             player.kill();
-            enemy.unuse('move');
             enemy.kill();
+
+            if (player.dead) {
+                enemy.unuse('move');
+            }
         }
     });
 
@@ -24,6 +27,13 @@ export default function collisions() {
     onCollide('player', 'jumping_pad', (player) => {
         if (!player.isJumping) {
             player.jump();
+        }
+    });
+
+    onCollide('player', 'shield', (player, shield) => {
+        if (!player.dead) {
+            player.powerUps.shield = true;
+            destroy(shield);
         }
     });
 
